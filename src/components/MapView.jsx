@@ -5,6 +5,7 @@ import { getAuth } from "firebase/auth";
 import { divIcon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import useRealtimeLocations from "../hooks/useRealtimeLocations";
+import SearchControl from "./SearchControl";
 
 // Marker with photo and name label
 const getPhotoLabelIcon = (name, photoURL) =>
@@ -44,7 +45,6 @@ export default function MapView() {
   if (loading) {
     return <p className="text-center text-slate-600">লোড হচ্ছে...</p>;
   }
-
   // Filter last 1 hour's active users
   const oneHourAgo = Date.now() - 60 * 60 * 1000;
   const activePeople = people.filter((p) => {
@@ -52,6 +52,7 @@ export default function MapView() {
     return updated >= oneHourAgo;
   });
 
+  console.log("peoples", people);
   // Center map to current location
   const handleFindMe = () => {
     if (!mapRef.current) {
@@ -111,7 +112,7 @@ export default function MapView() {
               attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
+            <SearchControl />
             <MarkerClusterGroup>
               {activePeople.map((person) => {
                 const isSelf = person.id === currentUid;
