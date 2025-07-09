@@ -18,7 +18,7 @@ export default function AutoLoginAndTrack() {
     // Listen for auth state change
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log("✅ Logged in:", currentUser.displayName);
+        console.log("Logged in:", currentUser.displayName);
         setUser(currentUser);
         startTrackingLocation(currentUser); // Start location tracking
       }
@@ -35,9 +35,9 @@ export default function AutoLoginAndTrack() {
       const result = await signInWithPopup(auth, provider);
       const loggedUser = result.user;
       setUser(loggedUser);
-      console.log("✅ Google Sign-In successful:", loggedUser.displayName);
+      console.log("Google Sign-In successful:", loggedUser.displayName);
     } catch (error) {
-      console.error("❌ Google Sign-In error:", error);
+      console.error("Google Sign-In error:", error);
     }
   };
 
@@ -77,14 +77,14 @@ function startTrackingLocation(user) {
 
         setDoc(doc(db, "realtime_locations", user.uid), userData)
           .then(() => {
-            console.log("📍 Location updated:", userData);
+            // console.log("Location updated:", userData);
           })
           .catch((err) => {
-            console.error("❌ Failed to update location:", err);
+            console.error("Failed to update location:", err);
           });
       },
       (err) => {
-        console.error("❌ Geolocation error:", err);
+        console.error("Geolocation error:", err);
       }
     );
   };

@@ -1,8 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import MapView from "../components/MapView";
-import CheckInForm from "../components/CheckInForm";
 import Footer from "../components/Footer";
+import AutoLoginAndTrack from "./AutoLoginAndTrack";
 
 export default function Home() {
   return (
@@ -24,14 +23,6 @@ export default function Home() {
           টেক দুনিয়া দ্রুত এগোচ্ছে, তাই নিয়মিত আড্ডায় যোগ দিয়ে সবার সাথে থাকো।
         </p>
       </header>
-
-      {/* Map Section */}
-      <MapView />
-
-      {/* Check-In Form Section */}
-      <CheckInForm />
-
-      {/* Footer */}
       <Footer />
     </div>
   );
