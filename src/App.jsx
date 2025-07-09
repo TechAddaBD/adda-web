@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Map from "./pages/Map";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -24,7 +25,14 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        {user && <Route path="/map" element={<Map />} />}
+        <Route
+          path="/map"
+          element={
+            <PrivateRoute user={user}>
+              <Map />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );

@@ -11,6 +11,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <header className="flex-grow flex flex-col justify-center items-center text-center px-4 py-16 max-w-4xl mx-auto">
+        <AutoLoginAndTrack />
         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight mb-4">
           ধানমন্ডি লেকপাড়ে{" "}
           <span className="text-blue-500">শনিবার সন্ধ্যা ৬টা থেকে ৮টা</span>{" "}

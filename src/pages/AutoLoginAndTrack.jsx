@@ -42,7 +42,7 @@ export default function AutoLoginAndTrack() {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="">
       {!user && (
         <button
           onClick={handleGoogleLogin}
