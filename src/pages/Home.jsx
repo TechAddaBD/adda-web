@@ -13,17 +13,21 @@ export default function Home() {
       <header className="flex-grow flex flex-col justify-center items-center text-center px-4 py-16 max-w-4xl mx-auto">
         <AutoLoginAndTrack />
         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight mb-4">
-          ধানমন্ডি লেকপাড়ে{" "}
-          <span className="text-blue-500">শনিবার সন্ধ্যা ৬টা থেকে ৮টা</span>{" "}
-          পর্যন্ত <br />
-          সবাই মিলে <span className="text-amber-500">আড্ডা</span> দিই!
+          Weekly Tech Meetup by Dhanmondi Lake <br />
+          <span className="text-blue-500">
+            Every Saturday, 6:00 PM – 8:00 PM
+          </span>
         </h1>
         <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 max-w-3xl">
-          কোনো রেজিস্ট্রেশন ফি নেই, কোনো চাপ নেই। শুধু শেয়ার হবে জ্ঞান, আইডিয়া
-          আর ঝালমুড়ি। <br />
-          টেক দুনিয়া দ্রুত এগোচ্ছে, তাই নিয়মিত আড্ডায় যোগ দিয়ে সবার সাথে থাকো।
+          A friendly gathering of developers, designers, entrepreneurs, and tech
+          enthusiasts. <br />
+          No registration, no fees — just meaningful conversations, knowledge
+          sharing, and networking. <br />
+          Stay updated with the fast-changing tech world and be part of a
+          growing, collaborative community.
         </p>
       </header>
+
       <Footer />
     </div>
   );

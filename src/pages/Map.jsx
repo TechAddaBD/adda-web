@@ -33,10 +33,9 @@ const Map = () => {
   }
 
   return (
-    <section className="relative w-full h-screen py-10 px-4 bg-slate-100 dark:bg-slate-900">
-      <div className="">
-        {/* 🗺️ Map container */}
-        <div className="relative w-full h-[500px] rounded-xl overflow-hidden border shadow">
+    <section className="relative w-full h-screen bg-slate-100 dark:bg-slate-900">
+      <div className="w-full h-full">
+        <div className="relative w-full h-full overflow-hidden">
           <MapContainer
             center={[23.7465, 90.374]}
             zoom={16}
@@ -48,10 +47,7 @@ const Map = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {/* 🔍 Search bar */}
             <SearchControl />
-
-            {/* 📍 My Location Button */}
             <LocateButton onLocate={setUserPosition} />
 
             <MarkerClusterGroup>
@@ -89,7 +85,6 @@ const Map = () => {
               })}
             </MarkerClusterGroup>
 
-            {/* 🔵 Circle around me */}
             {userPosition && (
               <Circle
                 center={userPosition}
