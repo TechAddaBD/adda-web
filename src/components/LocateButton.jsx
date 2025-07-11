@@ -25,10 +25,10 @@ const LocateButton = ({ onLocate }) => {
   return (
     <button
       onClick={handleClick}
-      className="absolute top-5 right-5 bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-blue-100 z-[999] flex items-center gap-2 cursor-pointer"
-      title="আমার অবস্থান দেখাও"
+      className="absolute bottom-5 right-5 bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-blue-100 z-[999] flex items-center gap-2 cursor-pointer"
+      title="See your location"
     >
-      <Locate /> <span className="text-sm font-medium">আমার অবস্থান</span>
+      <Locate /> <span className="text-sm font-medium">Your location</span>
     </button>
   );
 };

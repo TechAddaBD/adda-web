@@ -29,7 +29,7 @@ const Map = () => {
   });
 
   if (loading) {
-    return <p className="text-center text-slate-600">লোড হচ্ছে...</p>;
+    return <p className="text-center text-slate-600">Loading ...</p>;
   }
 
   return (
@@ -53,7 +53,7 @@ const Map = () => {
             <MarkerClusterGroup>
               {activePeople.map((person) => {
                 const isSelf = person.id === currentUid;
-                const labelName = isSelf ? "🧍 আপনি" : person.name;
+                const labelName = isSelf ? "🧍 Me" : person.name;
                 const photoURL = person.photoURL || "fallback.png";
 
                 return (
