@@ -18,7 +18,7 @@ export default function Navbar() {
             to="/map"
             className="text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-amber-400 transition"
           >
-            ম্যাপ দেখুন
+            Map
           </Link>
         </div>
       </div>
