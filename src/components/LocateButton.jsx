@@ -6,7 +6,7 @@ const LocateButton = ({ onLocate }) => {
   const map = useMap();
   const handleClick = () => {
     if (!navigator.geolocation) {
-      alert("আপনার ব্রাউজারে Geolocation সাপোর্ট করে না!");
+      alert("Browser not support Geolocation");
       return;
     }
 
@@ -17,7 +17,7 @@ const LocateButton = ({ onLocate }) => {
         onLocate([latitude, longitude]);
       },
       (err) => {
-        alert("অবস্থান পাওয়া যায়নি!");
+        alert("Location Not Found!");
         console.error("❌ Geolocation Error:", err);
       }
     );

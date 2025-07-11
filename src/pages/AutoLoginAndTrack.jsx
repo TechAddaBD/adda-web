@@ -5,12 +5,14 @@ import {
   signInWithPopup,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useNavigate } from "react-router";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { db } from "../services/firebaseConfig";
 import { defaultImage } from "../utils/defaultImage";
 
 export default function AutoLoginAndTrack() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const auth = getAuth();
@@ -35,6 +37,7 @@ export default function AutoLoginAndTrack() {
       const result = await signInWithPopup(auth, provider);
       const loggedUser = result.user;
       setUser(loggedUser);
+      navigate("/map");
       console.log("Google Sign-In successful:", loggedUser.displayName);
     } catch (error) {
       console.error("Google Sign-In error:", error);
