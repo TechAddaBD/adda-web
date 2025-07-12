@@ -31,7 +31,7 @@ const LocateButton = ({ map, onLocate }) => { // map prop added
   return (
     <button
       onClick={handleClick}
-      className="absolute bottom-30 right-2.5 px-2 py-2 rounded-full shadow-md cursor-pointer"
+      className="absolute bottom-30 right-2.5 px-2 py-2 rounded-full shadow-md hover:bg-blue-100 z-[999] cursor-pointer"
       title="See your location"
     >
       <Locate />
