@@ -51,7 +51,7 @@ const Map = () => {
             <LocateButton onLocate={setUserPosition} />
 
             <MarkerClusterGroup>
-              {activePeople.map((person) => {
+              {people.map((person) => {
                 const isSelf = person.id === currentUid;
                 const labelName = isSelf ? "🧍 Me" : person.name;
                 const photoURL = person.photoURL || "fallback.png";
