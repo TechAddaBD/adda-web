@@ -3,6 +3,8 @@ import useRealtimeLocations from "../hooks/useRealtimeLocations";
 import { getAuth } from "firebase/auth";
 import SearchControl from "../components/SearchControl";
 import LocateButton from "../components/LocateButton";
+import MobileNavbar from "../components/MobileNavbar";
+import MobileFooter from "../components/MobileFooter";
 
 import {
   APIProvider,
@@ -14,12 +16,7 @@ import {
 import AuthControl from "../components/AuthControl.jsx";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
-const MapComponent = ({
-  people,
-  currentUid,
-  userPosition,
-  onMapLoad,
-}) => {
+const MapComponent = ({ people, currentUid, userPosition, onMapLoad }) => {
   const map = useMap();
   const [selectedPerson, setSelectedPerson] = useState(null);
 
@@ -42,22 +39,25 @@ const MapComponent = ({
             position={{ lat: person.lat, lng: person.lng }}
             onClick={() => setSelectedPerson(person)}
           >
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              background: '#fff',
-              border: '1px solid #ccc',
-              borderRadius: '50%',
-              padding: '1px 1px',
-            }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                background: "#fff",
+                border: "1px solid #ccc",
+                borderRadius: "50%",
+                padding: "1px 1px",
+              }}
+            >
               <img
                 src={photoURL}
                 alt={labelName}
                 style={{
-                  width: '24px',
-                  height: '24px',
-                  borderRadius: '50%',
-                }}/>
+                  width: "24px",
+                  height: "24px",
+                  borderRadius: "50%",
+                }}
+              />
             </div>
           </AdvancedMarker>
         );
@@ -75,9 +75,7 @@ const MapComponent = ({
               className="w-12 h-12 rounded-full mx-auto border border-slate-300"
             />
             <p className="font-semibold text-blue-600">
-              {selectedPerson.id === currentUid
-                ? "🧍 Me"
-                : selectedPerson.name}
+              {selectedPerson.id === currentUid ? "🧍 Me" : selectedPerson.name}
             </p>
             <p className="text-sm text-slate-500">
               ⏱️ Updated:{" "}
@@ -116,11 +114,12 @@ const MarkerComponent = ({ people }) => {
       return;
     }
 
-    const markers = people.map((person) =>
-      new window.google.maps.marker.AdvancedMarkerElement({
-        position: { lat: person.lat, lng: person.lng },
-        content: document.createElement('div'),
-      })
+    const markers = people.map(
+      (person) =>
+        new window.google.maps.marker.AdvancedMarkerElement({
+          position: { lat: person.lat, lng: person.lng },
+          content: document.createElement("div"),
+        })
     );
     new MarkerClusterer({ markers, map: map });
   }, [map, people]);
@@ -154,7 +153,7 @@ const MapPage = () => {
   }
 
   return (
-    <section className="relative w-full h-screen bg-slate-100 dark:bg-slate-900">
+    <section className="relative w-full h-screen bg-slate-100 dark:bg-slate-900 overflow-hidden">
       <APIProvider apiKey={apiKey}>
         <Map
           defaultCenter={{ lat: 23.7461685, lng: 90.3780503 }}
@@ -172,7 +171,17 @@ const MapPage = () => {
           />
         </Map>
       </APIProvider>
-      {gMapInstance && <SearchControl map={gMapInstance} />}
+      {gMapInstance && (
+        <>
+          <div className="hidden md:block">
+            <SearchControl map={gMapInstance} />
+          </div>
+          <div className="md:hidden">
+            <MobileNavbar map={gMapInstance} />
+          </div>
+        </>
+      )}
+      <MobileFooter />
       {gMapInstance && <AuthControl />}
       {gMapInstance && (
         <LocateButton map={gMapInstance} onLocate={setUserPosition} />
