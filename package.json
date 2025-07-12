@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@googlemaps/markerclusterer": "^2.6.2",
-    "@googlemaps/react-wrapper": "^1.2.0",
     "@tailwindcss/vite": "^4.1.11",
     "firebase": "^11.10.0",
     "leaflet": "^1.9.4",

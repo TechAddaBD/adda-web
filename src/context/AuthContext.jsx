@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useNavigate } from "react-router";
 import { defaultImage } from "../utils/defaultImage";
 import { db } from "../services/firebaseConfig";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
@@ -16,6 +17,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const auth = getAuth();
@@ -38,6 +40,7 @@ export const AuthProvider = ({ children }) => {
       const result = await signInWithPopup(auth, provider);
       const loggedUser = result.user;
       setUser(loggedUser);
+      navigate("/map");
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -47,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await signOut(getAuth());
       setUser(null);
+      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
     }
