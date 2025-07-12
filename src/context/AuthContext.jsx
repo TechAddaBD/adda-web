@@ -9,7 +9,8 @@ import {
 import { useNavigate } from "react-router";
 import { defaultImage } from "../utils/defaultImage";
 import { db } from "../services/firebaseConfig";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+// Replaced Firestore imports with Realtime Database imports
+import { ref, set, serverTimestamp } from "firebase/database";
 
 const AuthContext = createContext();
 
@@ -78,10 +79,10 @@ function startTrackingLocation(user) {
           photoURL: user.photoURL || defaultImage,
           lat: latitude,
           lng: longitude,
-          updatedAt: Timestamp.now(),
+          updatedAt: serverTimestamp(),
         };
 
-        setDoc(doc(db, "realtime_locations", user.uid), userData).catch((err) =>
+        set(ref(db, "realtime_locations/" + user.uid), userData).catch((err) =>
           console.error("Failed to update location:", err)
         );
       },

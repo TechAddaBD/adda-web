@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useNavigate } from "react-router";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { ref, set, serverTimestamp } from "firebase/database";
 import { db } from "../services/firebaseConfig";
 import { defaultImage } from "../utils/defaultImage";
 
@@ -75,10 +75,10 @@ function startTrackingLocation(user) {
           photoURL: user.photoURL || defaultImage,
           lat: latitude,
           lng: longitude,
-          updatedAt: Timestamp.now(),
+          updatedAt: serverTimestamp(),
         };
 
-        setDoc(doc(db, "realtime_locations", user.uid), userData)
+        set(ref(db, "realtime_locations/" + user.uid), userData)
           .then(() => {
             // console.log("Location updated:", userData);
           })
