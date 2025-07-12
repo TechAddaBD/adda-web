@@ -4,7 +4,6 @@ import { db } from "../services/firebaseConfig";
 
 export default function useRealtimeLocations() {
   const [people, setPeople] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -15,12 +14,11 @@ export default function useRealtimeLocations() {
           ...doc.data(),
         }));
         setPeople(peopleData);
-        setLoading(false);
       }
     );
 
     return () => unsubscribe(); // Unsubscribe on cleanup
   }, []);
 
-  return { people, loading };
+  return { people };
 }

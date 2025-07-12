@@ -1,10 +1,12 @@
 import { Locate } from "lucide-react";
 import React from "react";
-import { useMap } from "react-leaflet";
 
-const LocateButton = ({ onLocate }) => {
-  const map = useMap();
+const LocateButton = ({ map, onLocate }) => { // map prop added
   const handleClick = () => {
+    if (!map) {
+      console.error("Google Map instance not available in LocateButton");
+      return;
+    }
     if (!navigator.geolocation) {
       alert("Browser not support Geolocation");
       return;
@@ -13,8 +15,11 @@ const LocateButton = ({ onLocate }) => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        map.flyTo([latitude, longitude], 18);
-        onLocate([latitude, longitude]);
+        map.panTo({ lat: latitude, lng: longitude }); // Use panTo for smooth movement
+        map.setZoom(18); // Google Maps zoom level might need adjustment compared to Leaflet's
+        if (onLocate) {
+          onLocate([latitude, longitude]);
+        }
       },
       (err) => {
         alert("Location Not Found!");
@@ -22,13 +27,14 @@ const LocateButton = ({ onLocate }) => {
       }
     );
   };
+
   return (
     <button
       onClick={handleClick}
-      className="absolute bottom-5 right-5 bg-white text-blue-600 px-4 py-2 rounded-full shadow-md hover:bg-blue-100 z-[999] flex items-center gap-2 cursor-pointer"
+      className="absolute bottom-30 right-2.5 px-2 py-2 rounded-full shadow-md cursor-pointer"
       title="See your location"
     >
-      <Locate /> <span className="text-sm font-medium">Your location</span>
+      <Locate />
     </button>
   );
 };

@@ -1,22 +1,19 @@
-import { divIcon } from "leaflet";
+export const getPhotoLabelIcon = (name, photoURL) => {
+  const iconDiv = document.createElement('div');
+  iconDiv.style.display = 'flex';
+  iconDiv.style.alignItems = 'center';
+  iconDiv.style.background = '#fff';
+  iconDiv.style.border = '1px solid #ccc';
+  iconDiv.style.borderRadius = '50%';
+  iconDiv.style.padding = '1px 1px';
 
-export const getPhotoLabelIcon = (name, photoURL) =>
-  divIcon({
-    html: `
-      <div style="
-        display: flex;
-        align-items: center;
-        background: #fff;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 4px 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      ">
-        <img src="${photoURL}" style="width:24px;height:24px;border-radius:50%;margin-right:6px;" />
-        <span style="font-size:13px;font-weight:500;color:#333;">${name}</span>
-      </div>
-    `,
-    className: "",
-    iconSize: [120, 32],
-    iconAnchor: [60, 16],
-  });
+  const img = document.createElement('img');
+  img.src = photoURL;
+  img.style.width = '24px';
+  img.style.height = '24px';
+  img.style.borderRadius = '50%';
+
+  iconDiv.appendChild(img);
+
+  return iconDiv;
+};
