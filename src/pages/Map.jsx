@@ -24,7 +24,7 @@ const Map = () => {
 
   const oneHourAgo = Date.now() - 60 * 60 * 1000;
   const activePeople = people.filter((p) => {
-    const updated = p.updatedAt?.seconds * 1000;
+    const updated = p.updatedAt;
     return updated >= oneHourAgo;
   });
 
@@ -74,9 +74,7 @@ const Map = () => {
                         </p>
                         <p className="text-sm text-slate-500">
                           ⏱️ Updated:{" "}
-                          {new Date(
-                            person.updatedAt?.seconds * 1000
-                          ).toLocaleTimeString()}
+                          {new Date(person.updatedAt).toLocaleTimeString()}
                         </p>
                       </div>
                     </Popup>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { ref, onValue } from "firebase/database";
 import { db } from "../services/firebaseConfig";
 
 export default function useRealtimeLocations() {
@@ -7,14 +7,25 @@ export default function useRealtimeLocations() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(db, "realtime_locations"),
+    // Changed to use Realtime Database `ref` and `onValue`
+    const locationsRef = ref(db, "realtime_locations");
+    const unsubscribe = onValue(
+      locationsRef,
       (snapshot) => {
-        const peopleData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setPeople(peopleData);
+        const data = snapshot.val();
+        if (data) {
+          const peopleData = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
+          setPeople(peopleData);
+        } else {
+          setPeople([]);
+        }
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error fetching realtime locations:", error);
         setLoading(false);
       }
     );
